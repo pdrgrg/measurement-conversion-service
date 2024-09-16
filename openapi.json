@@ -1,0 +1,126 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Unit of Measurement Schema API",
+        "description": "Definition of paths and schemas supporting the Unit of Measurement microservice",
+        "version": "0.0.1"
+    },
+    "paths":{
+        "/uom/weights": {
+             "get":{
+                "responses": {
+                    "200": {
+                        "description": "Retrieve all weights in a list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RootModel"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+             }
+        }
+    },
+    "components": {
+        "schemas": {
+            "RootModel":{
+                "type":"object",
+                "properties": {
+                    "id": { "type": "string", "format": "uuid" },
+                    "created_at": { "type": "string", "format": "date-time" },
+                    "created_by": { "type": "string" },
+                    "schema_version": { "type": "integer" },
+                    "updated_at": { "type": "string", "format": "date-time" },
+                    "updated_by": { "type": "string" }
+                }
+            }
+        },
+        "responses": {
+            "400": {
+                "description": "invalid input, data invalid",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": { "type": "integer" },
+                                "status": { "type": "string" },
+                                "errors": {}
+                            },
+                            "required": ["code", "status"]
+                        }
+                    }
+                }
+            },
+            "403": {
+                "description": "insufficient permissions",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": { "type": "integer" },
+                                "status": { "type": "string" },
+                                "errors": {}
+                            },
+                            "required": ["code", "status"]
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "resource not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": { "type": "integer" },
+                                "status": { "type": "string" },
+                                "errors": {}
+                            },
+                            "required": ["code", "status"]
+                        }
+                    }
+                }
+            },
+            "409": {
+                "description": "conflicting resources",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": { "type": "integer" },
+                                "status": { "type": "string" },
+                                "errors": {}
+                            },
+                            "required": ["code", "status"]
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "unexpected error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": { "type": "integer" },
+                                "status": { "type": "string" },
+                                "errors": {}
+                            },
+                            "required": ["code", "status"]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
