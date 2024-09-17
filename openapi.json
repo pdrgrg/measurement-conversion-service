@@ -55,8 +55,9 @@
     },
     "components": {
         "schemas": {
-            "RootModel":{
-                "type":"object",
+            "RootModel": {
+                "type": "object",
+                "description": "The root model containing attributes all models in this MS support",
                 "properties": {
                     "id": { "type": "string", "format": "uuid" },
                     "created_at": { "type": "string", "format": "date-time" },
@@ -64,6 +65,18 @@
                     "schema_version": { "type": "integer" },
                     "updated_at": { "type": "string", "format": "date-time" },
                     "updated_by": { "type": "string" }
+                }
+            },
+            "MeasurementUnit": {
+                "type": "object",
+                "allOf": [{ "$ref": "#/components/schemas/RootModel" }],
+                "properties": {
+                    "abbreviation": { "type": "string" },
+                    "name": { "type": "string" },
+                    "system": {
+                        "type": "string",
+                        "enum": ["imperial", "metric"]
+                    }
                 }
             }
         },
